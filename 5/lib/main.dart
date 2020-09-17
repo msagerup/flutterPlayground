@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'quizBrain.dart';
 
 QuizBrain quizBrain = QuizBrain();
@@ -32,18 +33,23 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswer (bool userAnswer) {
     bool correctAnswer = quizBrain.checkAnswer(userAnswer);
-    if(correctAnswer == userAnswer) {
+    if(correctAnswer) {
       scoreKeeper.add(Icon(
         Icons.check,
         color: Colors.green,
       ));
-    }
-    if(correctAnswer != userAnswer) {
+    } else {
       scoreKeeper.add(Icon(
         Icons.close,
         color: Colors.red,
       ));
     }
+    if(quizBrain.gameReset) {
+      Alert(context: context, title: "Great", desc: "Thanks for using the Quizzer.").show();
+      scoreKeeper = [];
+    }
+    quizBrain.nextQuestion();
+
   }
 
   @override
@@ -84,9 +90,6 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 setState(() {
                   checkAnswer(true);
-                });
-                setState(() {
-                  quizBrain.nextQuestion();
                 });
                 //The user picked true.
               },

@@ -3,6 +3,7 @@ import 'question.dart';
 class QuizBrain {
 
   int _questionNumb = 0;
+  bool gameReset = false;
 
 
   List<Question> _questionList = [
@@ -38,9 +39,16 @@ class QuizBrain {
 
   void nextQuestion () {
     if (_questionNumb < _questionList.length -1) {
+      gameReset = false;
       _questionNumb++;
+
+    } else {
+      gameReset = true;
+      _questionNumb = 0;
+
     }
   }
+
 
   String getQuestionText() {
      return _questionList[_questionNumb].questionText;
