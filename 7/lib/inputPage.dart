@@ -1,5 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+const bottomContainerHeight = 80.0;
+const lightPurple = 0xFF1D1E33;
+const footerColor = 0xFFEB1552;
 
 class InputPage extends StatefulWidget {
   @override
@@ -20,12 +23,12 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                     child: ReusableCard(
-                      containerColor: Color(0xFF1D1E33),
+                      containerColor: Color(lightPurple),
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
-                      containerColor: Color(0xFF1D1E33),
+                      containerColor: Color(lightPurple),
                     ),
                   )
                 ],
@@ -36,7 +39,7 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                     child: ReusableCard(
-                      containerColor: Color(0xFF1D1E33),
+                      containerColor: Color(lightPurple),
                     ),
                   )
                 ],
@@ -47,16 +50,22 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                     child: ReusableCard(
-                      containerColor: Color(0xFF1D1E33),
+                      containerColor: Color(lightPurple),
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
-                      containerColor: Color(0xFF1D1E33),
+                      containerColor: Color(lightPurple),
                     ),
                   )
                 ],
               ),
+            ),
+            Container(
+              color: Color(footerColor),
+              margin: EdgeInsets.only(top: 10),
+              width: double.infinity,
+              height: bottomContainerHeight,
             )
           ],
         ));
@@ -64,13 +73,15 @@ class _InputPageState extends State<InputPage> {
 }
 
 class ReusableCard extends StatelessWidget {
-  ReusableCard({@required this.containerColor});
+  ReusableCard({@required this.containerColor, this.cardChild});
 
   final Color containerColor;
+  final Widget cardChild;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: cardChild,
       margin: EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
